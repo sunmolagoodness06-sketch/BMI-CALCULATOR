@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bmi.css">
+</head>
+<body>
+    <main>
+        <div class="input">
+            <input id="inputElement1" type="text" placeholder="weight">
+            <input id="inputElement2" type="text" placeholder="height">
+        </div>
+        <div class="buts">
+            <button onclick="convertMe()">Calculate BMI</button>
+        </div>
+        <p id="result"></p>
+    </main>
+</body>
+</html>
+<script>
+    let weightInput = document.getElementById('inputElement1')
+    let heightInput = document.getElementById('inputElement2')
+    let userResult = document.getElementById('result')
+
+    function convertMe() {
+        let weight = weightInput.value.trim()
+        let height = heightInput.value
+
+        console.log(weight);
+        console.log(height);
+
+
+       // bmi = weight in Kg / (height x height) in m2. 
+        height = height / 100
+        console.log(height);
+        finalResult = weight / (height * height)
+        console.log(finalResult.toFixed(1));
+        userResult.innerHTML = finalResult.toFixed(1)
+
+        if (weight === '') {
+            userResult.innerHTML = `Please input your weight`
+        } else if (!height) {
+            userResult.innerHTML = `Please input your height`
+            if (isNaN(weight)) {
+                userResult.innerHTML = `Please input a number`
+            }
+            if (isNaN(height)) {
+                userResult.innerHTML = `Please input a number`
+            }
+        }
+        // Underweight: BMI is less than 18.5
+        else if (finalResult <= 18.5) {
+            userResult.innerHTML = `Underweight: BMI is ${finalResult.toFixed(1)}`
+        }
+        // Normal weight: BMI is 18.5 to 24.9
+
+        else if (finalResult <= 24.9) {
+            userResult.innerHTML = `Normal: BMI is ${finalResult.toFixed(1)}`
+        }
+        // Overweight: BMI is 25 to 29.9
+
+        else if (finalResult <= 29.9) {
+            userResult.innerHTML = `You too dey Overweight guy: BMI is ${finalResult.toFixed(1)}`
+        }
+        else {
+            userResult.innerHTML = `Too Obese Abeg: BMI is ${finalResult.toFixed(1)}`
+        }
+        
+
+     
+        
+    }
+
+
+</script>
